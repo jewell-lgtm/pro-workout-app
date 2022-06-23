@@ -1,16 +1,14 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
-import tw from "tailwind-rn";
+import { NavigationContainer } from "@react-navigation/native";
+import { StackNavigator } from "./components/StackNavigator";
 
-// noinspection JSUnusedGlobalSymbols
-export default function App() {
+function App() {
   return (
-    <View style={tw("flex-1 justify-center items-center")}>
-      <Text style={tw("text-blue-600")}>
-        Open up App.tsx to start working on your app!
-      </Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   );
 }
+
+// noinspection JSUnusedGlobalSymbols
+export default App;
