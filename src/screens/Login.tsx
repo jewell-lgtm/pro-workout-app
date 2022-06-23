@@ -1,10 +1,10 @@
 import React from "react";
 import { SafeAreaView, Text } from "react-native";
 
-export function Chat(): JSX.Element {
+export function Login(): JSX.Element {
   return (
     <SafeAreaView>
-      <Text>I am the chat screen!</Text>
+      <Text>Time to log in, mate</Text>
     </SafeAreaView>
   );
 }
