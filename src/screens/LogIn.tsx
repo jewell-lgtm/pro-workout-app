@@ -1,23 +1,26 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import * as WebBrowser from "expo-web-browser"
 import React, { useCallback, useState } from "react"
 import { LogInScreenView } from "../components/ScreenView/LogInScreenView"
-import { useSignIn } from "../config/auth"
+import { useLoginWithGoogle, useSignIn } from "../config/auth"
 import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Log In">
 
+WebBrowser.maybeCompleteAuthSession()
+
 export function LogIn(props: Props): JSX.Element {
   const { navigate } = props.navigation
-  const [error, setError] = useState<null | Error>(null)
+  const [loginError, setLoginError] = useState<null | Error>(null)
 
   const signIn = useSignIn()
   const handleLogIn = useCallback(
     async (email: string, password: string) => {
       try {
-        setError(null)
+        setLoginError(null)
         await signIn(email, password)
       } catch (e) {
-        setError(e)
+        setLoginError(e)
       }
     },
     [signIn]
@@ -27,11 +30,14 @@ export function LogIn(props: Props): JSX.Element {
     navigate("Sign Up")
   }
 
+  const google = useLoginWithGoogle()
+
   return (
     <LogInScreenView
       onLogIn={handleLogIn}
       onPressSignUp={goToSignUp}
-      error={error}
+      loginWithGoogle={{ ready: google.ready, onPress: google.signIn }}
+      error={loginError || google.error || null}
     />
   )
 }

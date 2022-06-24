@@ -13,13 +13,12 @@ const firebaseConfig = {
   appId: Constants.manifest?.extra?.appId,
 }
 
-let Firebase: firebase.app.App
-
 const getFirebase = (): firebase.app.App => {
   if (firebase.apps.length === 0) {
-    Firebase = firebase.initializeApp(firebaseConfig)
+    return firebase.initializeApp(firebaseConfig)
+  } else {
+    return firebase.app()
   }
-  return Firebase
 }
 
 const FirebaseContext = createContext<firebase.app.App>(getFirebase())
@@ -32,6 +31,4 @@ export function FirebaseProvider({ children }: { children: ReactNode }) {
   )
 }
 
-export const useFirebase = (): firebase.app.App => {
-  return useContext(FirebaseContext)
-}
+export const useFirebase = (): firebase.app.App => useContext(FirebaseContext)
