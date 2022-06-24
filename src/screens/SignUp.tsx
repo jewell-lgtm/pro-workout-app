@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import React, { useCallback, useState } from "react"
 import { Button, SafeAreaView, Text, TextInput } from "react-native"
 import tw from "tailwind-rn"
-import { getFirebase } from "../config/Firebase"
+import { useFirebase } from "../config/Firebase"
 import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Sign Up">
@@ -15,9 +15,10 @@ export function SignUp(_props: Props): JSX.Element {
     (email: string) => _setEmail(email.toLocaleLowerCase()),
     [_setEmail]
   )
+  const firebase = useFirebase()
   const handleSignUp = async () => {
     try {
-      await getFirebase().auth().createUserWithEmailAndPassword(email, password)
+      await firebase.auth().createUserWithEmailAndPassword(email, password)
     } catch (e) {
       setError(e)
     }

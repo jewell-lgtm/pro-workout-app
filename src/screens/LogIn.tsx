@@ -1,16 +1,14 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import firebase from "firebase"
 import React, { useCallback, useState } from "react"
 import { Button, SafeAreaView, Text, TextInput } from "react-native"
 import tw from "tailwind-rn"
-import { getFirebase } from "../config/Firebase"
+import { useFirebase } from "../config/Firebase"
 import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">
 
 export function LogIn(props: Props): JSX.Element {
   const { navigate } = props.navigation
-
   const [email, _setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<null | Error>(null)
@@ -18,9 +16,10 @@ export function LogIn(props: Props): JSX.Element {
     (email: string) => _setEmail(email.toLocaleLowerCase()),
     [_setEmail]
   )
+  const firebase = useFirebase()
   const handleLogIn = async () => {
     try {
-      await getFirebase().auth().signInWithEmailAndPassword(email, password)
+      await firebase.auth().signInWithEmailAndPassword(email, password)
     } catch (e) {
       setError(e)
     }

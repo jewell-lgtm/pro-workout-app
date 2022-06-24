@@ -1,8 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import React from "react"
 import { Button, SafeAreaView, Text } from "react-native"
-import { useUser } from "../config/auth"
-import { getFirebase } from "../config/Firebase"
+import { useSignOut, useUser } from "../config/auth"
 import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Logged In">
@@ -10,9 +9,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Logged In">
 export function LoggedIn(_props: Props): JSX.Element {
   const user = useUser()
 
-  const handleSignOut = async () => {
-    console.log(await getFirebase().auth().signOut())
-  }
+  const handleSignOut = useSignOut()
 
   return (
     <SafeAreaView>
