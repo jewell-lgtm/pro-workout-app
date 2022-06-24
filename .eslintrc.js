@@ -40,5 +40,10 @@ module.exports = {
     ],
     "import/newline-after-import": "error",
     "import/no-default-export": "error",
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "react/function-component-definition": [
+      "error",
+      { namedComponents: "function-declaration" },
+    ],
   },
 };
