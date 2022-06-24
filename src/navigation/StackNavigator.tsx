@@ -1,19 +1,19 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
-import { useAuth } from "../hooks/useAuth";
-import { LoggedIn, Login, SignUp } from "../screens";
-import { RootStackParamList } from "./types";
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import React from "react"
+import { useAuth } from "../config/auth"
+import { LoggedIn, LogIn, SignUp } from "../screens"
+import { RootStackParamList } from "./types"
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function StackNavigator(): JSX.Element {
-  const user = useAuth();
+  const { user } = useAuth()
 
   return (
     <Stack.Navigator>
       {!user ? (
         <>
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Login" component={LogIn} />
           <Stack.Screen name="Sign Up" component={SignUp} />
         </>
       ) : (
@@ -22,5 +22,5 @@ export function StackNavigator(): JSX.Element {
         </>
       )}
     </Stack.Navigator>
-  );
+  )
 }

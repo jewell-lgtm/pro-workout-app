@@ -1,13 +1,16 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import firebase from "firebase"
 import React, { useCallback, useState } from "react"
 import { Button, SafeAreaView, Text, TextInput } from "react-native"
 import tw from "tailwind-rn"
 import { getFirebase } from "../config/Firebase"
 import { RootStackParamList } from "../navigation/types"
 
-type Props = NativeStackScreenProps<RootStackParamList, "Sign Up">
+type Props = NativeStackScreenProps<RootStackParamList, "Login">
 
-export function SignUp(_props: Props): JSX.Element {
+export function LogIn(props: Props): JSX.Element {
+  const { navigate } = props.navigation
+
   const [email, _setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<null | Error>(null)
@@ -15,12 +18,16 @@ export function SignUp(_props: Props): JSX.Element {
     (email: string) => _setEmail(email.toLocaleLowerCase()),
     [_setEmail]
   )
-  const handleSignUp = async () => {
+  const handleLogIn = async () => {
     try {
-      await getFirebase().auth().createUserWithEmailAndPassword(email, password)
+      await getFirebase().auth().signInWithEmailAndPassword(email, password)
     } catch (e) {
       setError(e)
     }
+  }
+
+  const goToSignUp = () => {
+    navigate("Sign Up")
   }
 
   return (
@@ -40,7 +47,8 @@ export function SignUp(_props: Props): JSX.Element {
         secureTextEntry={true}
       />
       {error && <Text>{error.message}</Text>}
-      <Button title={"Sign Up"} onPress={handleSignUp} />
+      <Button title={"Log In"} onPress={handleLogIn} />
+      <Button title={"Sign Up"} onPress={goToSignUp} />
     </SafeAreaView>
   )
 }

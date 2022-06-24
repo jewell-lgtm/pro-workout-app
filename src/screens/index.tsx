@@ -1,3 +1,3 @@
-export { Login } from "./Login";
-export { SignUp } from "./SignUp";
-export { LoggedIn } from "./LoggedIn";
+export { LogIn } from "./LogIn"
+export { SignUp } from "./SignUp"
+export { LoggedIn } from "./LoggedIn"
