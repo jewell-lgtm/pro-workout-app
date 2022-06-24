@@ -55,9 +55,9 @@ export function useSignIn() {
   }
 }
 
-export function useLogIn() {
+export function useSignUp() {
   const firebase = useFirebase()
   return async (email: string, password: string) => {
-    await firebase.auth().signInWithEmailAndPassword(email, password)
+    await firebase.auth().createUserWithEmailAndPassword(email, password)
   }
 }
