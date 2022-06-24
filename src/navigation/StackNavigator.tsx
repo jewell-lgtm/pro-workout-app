@@ -7,7 +7,7 @@ import { RootStackParamList } from "./types"
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function StackNavigator(): JSX.Element {
-  const { user } = useAuth()
+  const user = useAuth()
 
   return (
     <Stack.Navigator>

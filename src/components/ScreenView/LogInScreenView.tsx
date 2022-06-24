@@ -1,6 +1,19 @@
+import { Entypo } from "@native-base/icons"
+import {
+  Box,
+  Button,
+  FormControl,
+  HStack,
+  Icon,
+  Input,
+  KeyboardAvoidingView,
+  Link,
+  Text,
+  VStack,
+} from "native-base"
 import React, { useCallback, useState } from "react"
-import { Button, SafeAreaView, Text, TextInput } from "react-native"
-import tw from "tailwind-rn"
+import { DisplayError, PageHeader, PageSubheader } from ".."
+import { useHideHeader } from "../../hooks/useHideHeader"
 
 type Props = {
   onLogIn: (email: string, password: string) => void
@@ -17,30 +30,47 @@ export function LogInScreenView(props: Props) {
   const handlePressLogIn = useCallback(() => {
     onLogIn(email, password)
   }, [email, password, onLogIn])
+  useHideHeader()
 
   return (
-    <SafeAreaView>
-      <TextInput
-        style={tw("border-b-2 bg-white")}
-        autoFocus={true}
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={tw("border-b-2 bg-white")}
-        autoFocus={true}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-      />
-      {error && <Text>{error.message}</Text>}
-      <Button title={"Log In"} onPress={handlePressLogIn} />
-      <Button
-        title={"Log In With Google"}
-        disabled={!loginWithGoogle.ready}
-        onPress={loginWithGoogle.onPress}
-      />
-      <Button title={"Sign Up"} onPress={onPressSignUp} />
-    </SafeAreaView>
+    <KeyboardAvoidingView>
+      <Box safeArea px="2" py="8" w="90%" maxW={290} alignSelf="center">
+        <PageHeader>Welcome</PageHeader>
+        <PageSubheader>Sign in to continue</PageSubheader>
+
+        <VStack space={3} mt="5">
+          <FormControl>
+            <FormControl.Label>Email Address:</FormControl.Label>
+            <Input autoFocus value={email} onChangeText={setEmail} />
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Password:</FormControl.Label>
+            <Input
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+            />
+          </FormControl>
+          {error && <DisplayError error={error} />}
+          <Button colorScheme="primary" onPress={handlePressLogIn}>
+            Sign In
+          </Button>
+          <Button
+            colorScheme="secondary"
+            disabled={!loginWithGoogle.ready}
+            onPress={loginWithGoogle.onPress}
+          >
+            <HStack space={2} alignItems="center">
+              <Icon as={Entypo} name="google-" color="warmGray.50" />
+              <Text color="warmGray.50">Sign in with Google</Text>
+            </HStack>
+          </Button>
+
+          <Link alignSelf="center" onPress={onPressSignUp}>
+            Sign up as a new user
+          </Link>
+        </VStack>
+      </Box>
+    </KeyboardAvoidingView>
   )
 }

@@ -1,6 +1,15 @@
+import {
+  Box,
+  Button,
+  FormControl,
+  Input,
+  KeyboardAvoidingView,
+  Link,
+  VStack,
+} from "native-base"
 import React, { useCallback, useState } from "react"
-import { Button, SafeAreaView, Text, TextInput } from "react-native"
-import tw from "tailwind-rn"
+import { DisplayError, PageHeader, PageSubheader } from ".."
+import { useHideHeader } from "../../hooks/useHideHeader"
 
 export function SignUpScreenView({
   onSignUp,
@@ -20,26 +29,51 @@ export function SignUpScreenView({
   const handlePressSignUp = useCallback(() => {
     onSignUp(email, password)
   }, [onSignUp])
+  useHideHeader()
+
+  const [i, setI] = useState(0)
+  const handleEmailTouchEnd = () => {
+    if (i >= 4) {
+      setI(0)
+      setEmail(Math.random().toString().slice(2, 10) + "@example.com")
+    } else {
+      setI(i + 1)
+    }
+  }
 
   return (
-    <SafeAreaView>
-      <Text>Time to sign up, mate</Text>
-      <TextInput
-        style={tw("border-b-2 bg-white")}
-        autoFocus={true}
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={tw("border-b-2 bg-white")}
-        autoFocus={true}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-      />
-      {error && <Text>{error.message}</Text>}
-      <Button title={"Sign Up"} onPress={handlePressSignUp} />
-      <Button title={"Log In"} onPress={handlePressLogIn} />
-    </SafeAreaView>
+    <KeyboardAvoidingView>
+      <Box safeArea px="2" py="8" w="90%" maxW={290} alignSelf="center">
+        <PageHeader>Sign Up</PageHeader>
+        <PageSubheader>Create your user account</PageSubheader>
+
+        <VStack space={3} mt="5">
+          <FormControl>
+            <FormControl.Label>Email Address:</FormControl.Label>
+            <Input
+              autoFocus
+              value={email}
+              onChangeText={setEmail}
+              onTouchEnd={handleEmailTouchEnd}
+            />
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Password:</FormControl.Label>
+            <Input
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+            />
+          </FormControl>
+          {error && <DisplayError error={error} />}
+          <Button colorScheme="primary" onPress={handlePressSignUp}>
+            Sign Up
+          </Button>
+          <Link alignSelf="center" onPress={handlePressLogIn}>
+            Sign in with existing account
+          </Link>
+        </VStack>
+      </Box>
+    </KeyboardAvoidingView>
   )
 }

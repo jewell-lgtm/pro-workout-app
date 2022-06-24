@@ -1,4 +1,5 @@
 import * as Google from "expo-auth-session/providers/google"
+import Constants from "expo-constants"
 import firebase from "firebase"
 import _firebase from "firebase"
 import React, {
@@ -70,8 +71,7 @@ export function useLoginWithGoogle(): {
   const firebase = useFirebase()
   const [error, setError] = useState<null | Error>(null)
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId:
-      "1034448682989-gstrmbr9aq9q4l3inl8h6pmtsdmvm2gm.apps.googleusercontent.com",
+    clientId: Constants.manifest?.extra?.authGoogleClientId,
   })
 
   useEffect(() => {

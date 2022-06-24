@@ -1,4 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native"
+import { NativeBaseProvider } from "native-base"
 import React from "react"
 import { AuthProvider } from "./config/auth"
 import { FirebaseProvider } from "./config/Firebase"
@@ -9,7 +10,9 @@ export function App() {
     <FirebaseProvider>
       <NavigationContainer>
         <AuthProvider>
-          <StackNavigator />
+          <NativeBaseProvider>
+            <StackNavigator />
+          </NativeBaseProvider>
         </AuthProvider>
       </NavigationContainer>
     </FirebaseProvider>

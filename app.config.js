@@ -1,8 +1,8 @@
 /* eslint-disable import/no-default-export */
-import "dotenv/config";
+import "dotenv/config"
 
 // eslint-disable-next-line no-undef
-let _process = process ?? { env: {} };
+let _process = process ?? { env: {} }
 
 export default {
   expo: {
@@ -40,6 +40,7 @@ export default {
       storageBucket: _process.env.STORAGE_BUCKET,
       messagingSenderId: _process.env.MESSAGING_SENDER_ID,
       appId: _process.env.APP_ID,
+      authGoogleClientId: _process.env.AUTH_GOOGLE_CLIENT_ID,
     },
   },
-};
+}
