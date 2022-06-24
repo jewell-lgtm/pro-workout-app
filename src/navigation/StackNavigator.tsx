@@ -13,7 +13,7 @@ export function StackNavigator(): JSX.Element {
     <Stack.Navigator>
       {!user ? (
         <>
-          <Stack.Screen name="Login" component={LogIn} />
+          <Stack.Screen name="Log In" component={LogIn} />
           <Stack.Screen name="Sign Up" component={SignUp} />
         </>
       ) : (

@@ -7,7 +7,10 @@ import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Sign Up">
 
-export function SignUp(_props: Props): JSX.Element {
+export function SignUp(props: Props): JSX.Element {
+  const {
+    navigation: { navigate },
+  } = props
   const [email, _setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<null | Error>(null)
@@ -16,12 +19,15 @@ export function SignUp(_props: Props): JSX.Element {
     [_setEmail]
   )
   const firebase = useFirebase()
-  const handleSignUp = async () => {
+  const handlePressSignUp = async () => {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password)
     } catch (e) {
       setError(e)
     }
+  }
+  const handlePressLogIn = async () => {
+    navigate("Log In")
   }
 
   return (
@@ -41,7 +47,8 @@ export function SignUp(_props: Props): JSX.Element {
         secureTextEntry={true}
       />
       {error && <Text>{error.message}</Text>}
-      <Button title={"Sign Up"} onPress={handleSignUp} />
+      <Button title={"Sign Up"} onPress={handlePressSignUp} />
+      <Button title={"Log In"} onPress={handlePressLogIn} />
     </SafeAreaView>
   )
 }

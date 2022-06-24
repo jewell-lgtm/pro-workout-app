@@ -8,7 +8,6 @@ type Props = NativeStackScreenProps<RootStackParamList, "Logged In">
 
 export function LoggedIn(_props: Props): JSX.Element {
   const user = useUser()
-
   const handleSignOut = useSignOut()
 
   return (

@@ -44,6 +44,20 @@ export const useUser = (): User => {
 export function useSignOut() {
   const firebase = useFirebase()
   return async () => {
-    console.log(await firebase.auth().signOut())
+    await firebase.auth().signOut()
+  }
+}
+
+export function useSignIn() {
+  const firebase = useFirebase()
+  return async (email: string, password: string) => {
+    await firebase.auth().signInWithEmailAndPassword(email, password)
+  }
+}
+
+export function useLogIn() {
+  const firebase = useFirebase()
+  return async (email: string, password: string) => {
+    await firebase.auth().signInWithEmailAndPassword(email, password)
   }
 }
