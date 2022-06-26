@@ -1,15 +1,16 @@
 import { Box, Button, Text, VStack } from "native-base"
 import React from "react"
 import { User } from "../../config/auth"
-import { useHideHeader } from "../../hooks/useHideHeader"
+import { useHideHeader } from "../../hooks"
 
 type Props = {
   onSignOut: () => void
+  onPressGoToExercise: () => void
   user: User
 }
 
 export function LoggedInScreenView(props: Props) {
-  const { user, onSignOut } = props
+  const { user, onSignOut, onPressGoToExercise } = props
   useHideHeader()
 
   return (
@@ -30,6 +31,9 @@ export function LoggedInScreenView(props: Props) {
             <Text color="text.100">Something, something</Text>
           </VStack>
         </Box>
+      </Box>
+      <Box py={12}>
+        <Button onPress={onPressGoToExercise}>Go To Exercise</Button>
       </Box>
       <Box py={12}>
         <Button onPress={onSignOut}>Log Out</Button>

@@ -1,3 +1,3 @@
-export * from "./Type"
-export * from "./Error"
-export * from "./ScreenView"
+export * from "./error"
+export * from "./screen-view"
+export * from "./type"

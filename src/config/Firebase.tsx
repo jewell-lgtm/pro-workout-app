@@ -4,6 +4,7 @@ import React, { useContext } from "react"
 import { createContext, ReactNode } from "react"
 
 // Initialize Firebase
+
 const firebaseConfig = {
   apiKey: Constants.manifest?.extra?.apiKey,
   authDomain: Constants.manifest?.extra?.authDomain,
@@ -13,19 +14,17 @@ const firebaseConfig = {
   appId: Constants.manifest?.extra?.appId,
 }
 
-const getFirebase = (): firebase.app.App => {
-  if (firebase.apps.length === 0) {
-    return firebase.initializeApp(firebaseConfig)
-  } else {
-    return firebase.app()
-  }
-}
-
-const FirebaseContext = createContext<firebase.app.App>(getFirebase())
+const FirebaseContext = createContext<firebase.app.App>(undefined as any)
 
 export function FirebaseProvider({ children }: { children: ReactNode }) {
   return (
-    <FirebaseContext.Provider value={getFirebase()}>
+    <FirebaseContext.Provider
+      value={
+        firebase.apps.length === 0
+          ? firebase.initializeApp(firebaseConfig)
+          : firebase.app()
+      }
+    >
       {children}
     </FirebaseContext.Provider>
   )

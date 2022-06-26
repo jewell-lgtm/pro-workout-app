@@ -1,3 +1,4 @@
-export { LogIn } from "./LogIn"
-export { SignUp } from "./SignUp"
-export { LoggedIn } from "./LoggedIn"
+export { ExerciseScreen } from "./ExerciseScreen"
+export { LoggedInScreen } from "./LoggedInScreen"
+export { LogInScreen } from "./LogInScreen"
+export { SignUpScreen } from "./SignUpScreen"

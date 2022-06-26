@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import React, { useCallback, useState } from "react"
-import { SignUpScreenView } from "../components/ScreenView/SignUpScreenView"
+import { SignUpScreenView } from "../components"
 import { useSignUp } from "../config/auth"
 import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Sign Up">
 
-export function SignUp(props: Props): JSX.Element {
+export function SignUpScreen(props: Props): JSX.Element {
   const {
     navigation: { navigate },
   } = props

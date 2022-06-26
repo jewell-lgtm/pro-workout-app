@@ -1,0 +1,1 @@
+export { useHideHeader } from "./useHideHeader"

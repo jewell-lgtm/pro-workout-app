@@ -8,8 +8,9 @@ import {
   VStack,
 } from "native-base"
 import React, { useCallback, useState } from "react"
-import { DisplayError, PageHeader, PageSubheader } from ".."
-import { useHideHeader } from "../../hooks/useHideHeader"
+import { useHideHeader } from "../../hooks"
+import { DisplayError } from "../error"
+import { PageHeader, PageSubheader } from "../type"
 
 export function SignUpScreenView({
   onSignUp,

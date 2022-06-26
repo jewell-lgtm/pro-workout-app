@@ -7,14 +7,14 @@ import { StackNavigator } from "./navigation/StackNavigator"
 
 export function App() {
   return (
-    <FirebaseProvider>
-      <NavigationContainer>
-        <AuthProvider>
-          <NativeBaseProvider>
+    <NativeBaseProvider>
+      <FirebaseProvider>
+        <NavigationContainer>
+          <AuthProvider>
             <StackNavigator />
-          </NativeBaseProvider>
-        </AuthProvider>
-      </NavigationContainer>
-    </FirebaseProvider>
+          </AuthProvider>
+        </NavigationContainer>
+      </FirebaseProvider>
+    </NativeBaseProvider>
   )
 }
