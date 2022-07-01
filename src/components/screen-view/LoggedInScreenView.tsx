@@ -7,11 +7,10 @@ type Props = {
   onSignOut: () => void
   onPressGoToExercise: () => void
   user: User
-  data: unknown
 }
 
 export function LoggedInScreenView(props: Props) {
-  const { user, onSignOut, onPressGoToExercise, data } = props
+  const { user, onSignOut, onPressGoToExercise } = props
   useHideHeader()
 
   return (
@@ -33,7 +32,6 @@ export function LoggedInScreenView(props: Props) {
           </VStack>
         </Box>
       </Box>
-      <Box>{JSON.stringify(data, null, 4)}</Box>
       <Box py={12}>
         <Button onPress={onPressGoToExercise}>Go To Exercise</Button>
       </Box>

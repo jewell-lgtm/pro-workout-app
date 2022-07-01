@@ -1,0 +1,31 @@
+query WorkoutPlan {
+  exercisePlan(id: 1) {
+    __typename
+    id
+    name
+    sortOrder
+    exercises {
+      __typename
+      id
+      name
+      sortOrder
+      difficulties {
+        __typename
+        id
+        name
+        sortOrder
+        multiplier
+        targetReps
+        targetSets
+        imageUrl
+        description
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

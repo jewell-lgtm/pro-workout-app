@@ -3,4 +3,5 @@ export type RootStackParamList = {
   "Logged In": undefined
   "Sign Up": undefined
   Exercise: undefined
+  Exercises: undefined
 }

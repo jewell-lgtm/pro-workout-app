@@ -1,7 +1,0 @@
-query TheCoolQuery {
-    redwood {
-        __typename
-        currentUser
-        prismaVersion
-    }
-}

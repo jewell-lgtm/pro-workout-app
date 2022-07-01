@@ -6,6 +6,7 @@ import {
   LogInScreen,
   SignUpScreen,
   ExerciseScreen,
+  ExercisesScreen,
 } from "../screens"
 import { RootStackParamList } from "./types"
 
@@ -25,6 +26,7 @@ export function StackNavigator(): JSX.Element {
         <>
           <Stack.Screen name="Logged In" component={LoggedInScreen} />
           <Stack.Screen name="Exercise" component={ExerciseScreen} />
+          <Stack.Screen name="Exercises" component={ExercisesScreen} />
         </>
       )}
     </Stack.Navigator>
