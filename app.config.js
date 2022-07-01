@@ -41,6 +41,7 @@ export default {
       messagingSenderId: _process.env.MESSAGING_SENDER_ID,
       appId: _process.env.APP_ID,
       authGoogleClientId: _process.env.AUTH_GOOGLE_CLIENT_ID,
+      backendUrl: _process.env.BACKEND_URL,
     },
   },
 }
