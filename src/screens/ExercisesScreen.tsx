@@ -3,19 +3,17 @@ import { Box, Text } from "native-base"
 import React from "react"
 import { DisplayError, ExercisesScreenView } from "../components"
 import { useWorkoutPlanQuery } from "../graphql/types"
+import { WorkoutPlanExercise } from "../graphql/WorkoutPlanQuery"
 import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Exercises">
 
-export function ExercisesScreen(_props: Props): JSX.Element {
+export function ExercisesScreen(props: Props): JSX.Element {
+  const { navigation } = props
   const { data, error } = useWorkoutPlanQuery()
-  if (!data || !data.exercisePlan) {
-    return (
-      <Box>
-        <Text>Loading…</Text>
-      </Box>
-    )
-  }
+  const handlePressExercise = (exercise: WorkoutPlanExercise) =>
+    navigation.navigate("Exercise", { exercise: exercise.id })
+
   if (error) {
     return (
       <Box>
@@ -23,5 +21,19 @@ export function ExercisesScreen(_props: Props): JSX.Element {
       </Box>
     )
   }
-  return <ExercisesScreenView exercises={data.exercisePlan.exercises} />
+
+  if (!data || !data.exercisePlan) {
+    return (
+      <Box>
+        <Text>Loading…</Text>
+      </Box>
+    )
+  }
+
+  return (
+    <ExercisesScreenView
+      exercises={data.exercisePlan.exercises}
+      onPressExercise={handlePressExercise}
+    />
+  )
 }

@@ -8,7 +8,6 @@ import {
   VStack,
 } from "native-base"
 import React, { useCallback, useState } from "react"
-import { useHideHeader } from "../../hooks"
 import { DisplayError } from "../error"
 import { PageHeader, PageSubheader } from "../type"
 
@@ -30,7 +29,6 @@ export function SignUpScreenView({
   const handlePressSignUp = useCallback(() => {
     onSignUp(email, password)
   }, [onSignUp])
-  useHideHeader()
 
   const [i, setI] = useState(0)
   const handleEmailTouchEnd = () => {

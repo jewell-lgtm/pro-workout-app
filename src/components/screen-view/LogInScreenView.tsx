@@ -12,7 +12,6 @@ import {
   VStack,
 } from "native-base"
 import React, { useCallback, useState } from "react"
-import { useHideHeader } from "../../hooks"
 import { DisplayError } from "../error"
 import { PageHeader, PageSubheader } from "../type"
 
@@ -31,7 +30,6 @@ export function LogInScreenView(props: Props) {
   const handlePressLogIn = useCallback(() => {
     onLogIn(email, password)
   }, [email, password, onLogIn])
-  useHideHeader()
 
   return (
     <KeyboardAvoidingView>

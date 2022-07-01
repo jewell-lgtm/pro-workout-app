@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { useColorModeValue, useTheme, useThemeProps } from "native-base"
 import React from "react"
 import { useAuth } from "../config/auth"
 import {
@@ -14,9 +15,20 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function StackNavigator(): JSX.Element {
   const user = useAuth()
+  const theme = useTheme()
+  const backgroundColor = theme.colors.light["900"]
+  const headerTintColor = theme.colors.text["100"]
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor },
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerTintColor,
+      }}
+    >
       {!user ? (
         <>
           <Stack.Screen name="Log In" component={LogInScreen} />

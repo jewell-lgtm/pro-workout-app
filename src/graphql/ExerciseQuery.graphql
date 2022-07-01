@@ -1,0 +1,23 @@
+query Exercise($id: Int!) {
+  exercise(id: $id) {
+    __typename
+    id
+    name
+    sortOrder
+    difficulties {
+      __typename
+      id
+      name
+      sortOrder
+      multiplier
+      targetReps
+      targetSets
+      imageUrl
+      description
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
