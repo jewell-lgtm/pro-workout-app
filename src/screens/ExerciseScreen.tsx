@@ -33,5 +33,10 @@ export function ExerciseScreen(props: Props): JSX.Element {
     )
   }
 
-  return <ExerciseScreenView exercise={exercise} />
+  return (
+    <ExerciseScreenView
+      exercise={exercise}
+      difficulty={exercise.difficulties[0]}
+    />
+  )
 }

@@ -1,46 +1,60 @@
-import { Box, Button, HStack, Image, Text, VStack } from "native-base"
+import {
+  ArrowBackIcon,
+  Box,
+  IconButton,
+  Image,
+  ScrollView,
+  Text,
+} from "native-base"
 import React from "react"
-import { TouchableOpacity } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { Exercise } from "../../graphql/ExerciseQuery"
+import { Difficulty, Exercise } from "../../graphql/ExerciseQuery"
+import { useBackgroundColor, useTextColor } from "../../theme"
 import { PageHeader, PageSubheader } from "../type"
 
 type Props = {
   exercise: Exercise
+  difficulty: Difficulty
 }
 
 export function ExerciseScreenView(props: Props): JSX.Element {
-  const { exercise } = props
+  const { exercise, difficulty } = props
+  const backgroundColor = useBackgroundColor()
+  const textColor = useTextColor()
+
+  const lorem =
+    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque reiciendis repellat tempore. Accusantium aliquid delectus, dignissimos doloremque harum hic magni nobis quasi reiciendis. Aliquam debitis doloribus dolorum recusandae temporibus.\n\nAccusantium aliquid delectus, dignissimos doloremque harum hic magni nobis quasi reiciendis. Aliquam debitis doloribus dolorum recusandae temporibus."
 
   return (
-    <Box flex={1} bg="gray.900" color="text.50">
+    <Box flex={1} bg={backgroundColor} color={textColor}>
       <SafeAreaView>
-        <VStack px={4} space="4" mt="4">
-          <PageHeader>{exercise.difficulties[0].name}</PageHeader>
-          <PageSubheader>{exercise.name}</PageSubheader>
+        <IconButton
+          position="absolute"
+          top={8}
+          left={4}
+          icon={<ArrowBackIcon color={textColor} />}
+          zIndex={1}
+        />
+        <ScrollView>
+          <Box height="240px" width="full" backgroundColor="#bada55">
+            <Image
+              resizeMode={"cover"}
+              source={{ uri: difficulty.imageUrl }}
+              alt={difficulty.name}
+              flex={1}
+            />
+          </Box>
+          <Box p={4}>
+            <PageHeader>{difficulty.name}</PageHeader>
+            <PageSubheader>{exercise.name}</PageSubheader>
 
-          <HStack alignSelf="center">
-            <TouchableOpacity>
-              <Text>-</Text>
-            </TouchableOpacity>
-            <Text fontSize="6xl">123</Text>
-            <TouchableOpacity>
-              <Text>+</Text>
-            </TouchableOpacity>
-          </HStack>
-
-          <Image
-            source={{
-              uri: exercise.difficulties[0].imageUrl,
-            }}
-            alt={`${exercise.title} demonstration`}
-            height="64"
-            my="4"
-            borderRadius="lg"
-          />
-
-          <Button>Finish Set</Button>
-        </VStack>
+            {lorem.split("\n").map((line, index) => (
+              <Text key={index} color={textColor}>
+                {line}
+              </Text>
+            ))}
+          </Box>
+        </ScrollView>
       </SafeAreaView>
     </Box>
   )
