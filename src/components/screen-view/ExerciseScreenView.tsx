@@ -15,15 +15,13 @@ import { PageHeader, PageSubheader } from "../type"
 type Props = {
   exercise: Exercise
   difficulty: Difficulty
+  onPressBack: () => void
 }
 
 export function ExerciseScreenView(props: Props): JSX.Element {
-  const { exercise, difficulty } = props
+  const { exercise, difficulty, onPressBack: handlePressBack } = props
   const backgroundColor = useBackgroundColor()
   const textColor = useTextColor()
-
-  const lorem =
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque reiciendis repellat tempore. Accusantium aliquid delectus, dignissimos doloremque harum hic magni nobis quasi reiciendis. Aliquam debitis doloribus dolorum recusandae temporibus.\n\nAccusantium aliquid delectus, dignissimos doloremque harum hic magni nobis quasi reiciendis. Aliquam debitis doloribus dolorum recusandae temporibus."
 
   return (
     <Box flex={1} bg={backgroundColor} color={textColor}>
@@ -34,6 +32,7 @@ export function ExerciseScreenView(props: Props): JSX.Element {
           left={4}
           icon={<ArrowBackIcon color={textColor} />}
           zIndex={1}
+          onPress={handlePressBack}
         />
         <ScrollView>
           <Box height="240px" width="full" backgroundColor="#bada55">
@@ -48,7 +47,7 @@ export function ExerciseScreenView(props: Props): JSX.Element {
             <PageHeader>{difficulty.name}</PageHeader>
             <PageSubheader>{exercise.name}</PageSubheader>
 
-            {lorem.split("\n").map((line, index) => (
+            {difficulty.description.split("\n").map((line, index) => (
               <Text key={index} color={textColor}>
                 {line}
               </Text>
