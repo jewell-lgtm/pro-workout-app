@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import React, { useCallback } from "react"
+import { useColorMode } from "native-base"
+import React from "react"
 import { LoggedInScreenView } from "../components"
 import { useSignOut, useUser } from "../config/auth"
 import { RootStackParamList } from "../navigation/types"
@@ -12,15 +13,17 @@ export function LoggedInScreen(props: Props): JSX.Element {
   } = props
   const user = useUser()
   const handleSignOut = useSignOut()
-  const handlePressGoToExercise = useCallback(() => {
-    navigate("Exercises")
-  }, [navigate])
+  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <LoggedInScreenView
       user={user}
       onSignOut={handleSignOut}
-      onPressGoToExercise={handlePressGoToExercise}
+      onPressGoToExercises={() => {
+        navigate("Exercises")
+      }}
+      colorMode={colorMode}
+      toggleColorMode={toggleColorMode}
     />
   )
 }
