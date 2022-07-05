@@ -7,39 +7,70 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react"
 import { useFirebase } from "./Firebase"
 
 export type User = firebase.User
 
-type AuthContextType = User | null
+type AuthContextType = { user: User | null; token: string | null }
 
-const AuthContext = createContext<AuthContextType>(null)
+const AuthContext = createContext<AuthContextType>({ user: null, token: null })
 
 export function AuthProvider(props: { children: ReactNode }): JSX.Element {
   const { children } = props
   const [user, setUser] = useState<null | User>(null)
+  const [userToken, setUserToken] = useState<null | string>(null)
   const firebase = useFirebase()
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged((user) => {
-      setUser(user)
+      if (!user) {
+        setUser(null)
+        setUserToken(null)
+        return
+      }
+      user
+        .getIdToken(false)
+        .then((token) => {
+          setUser(user)
+          setUserToken(token)
+        })
+        .catch((e) => {
+          setUser(null)
+          setUserToken(null)
+          throw e
+        })
     })
   }, [firebase])
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>
+  const value = useMemo<AuthContextType>(
+    () => ({
+      user,
+      token: userToken,
+    }),
+    [user, userToken]
+  )
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = (): AuthContextType => useContext(AuthContext)
 
+// Note: DEMANDS a user to be present, don't use in screens where this might not be set
 export const useUser = (): User => {
-  const user = useAuth()
+  const { user } = useAuth()
   if (!user) {
     // TODO: something fancier than this
     throw new Error("Routing Error, user is required to view this screen")
   }
   return user
+}
+
+export const useToken = (): null | string => {
+  const { token } = useAuth()
+  return token
 }
 
 export function useSignOut() {
