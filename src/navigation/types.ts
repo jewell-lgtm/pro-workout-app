@@ -6,7 +6,7 @@ export type RootStackParamList = {
   "Sign Up": undefined
   Exercise: {
     exercise: Exercise["id"]
-    difficultyIndex: number
   }
   Exercises: undefined
+  "My Workout": undefined
 }

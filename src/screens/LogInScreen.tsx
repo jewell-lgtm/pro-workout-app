@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import * as WebBrowser from "expo-web-browser"
 import React, { useCallback, useState } from "react"
 import { LogInScreenView } from "../components"
-import { useLoginWithGoogle, useSignIn } from "../config/auth"
+import { useLoginWithGoogle, useSignIn } from "../config"
 import { RootStackParamList } from "../navigation/types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Log In">

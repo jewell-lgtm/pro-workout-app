@@ -10,6 +10,7 @@ import {
   ExercisesScreen,
   LoggedInScreen,
   LogInScreen,
+  MyWorkoutScreen,
   SignUpScreen,
 } from "../screens"
 import { useBackgroundColor } from "../theme"
@@ -37,6 +38,11 @@ export function StackNavigator(): JSX.Element {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Exercises" component={ExercisesScreen} />
+          <Stack.Screen
+            name="My Workout"
+            component={MyWorkoutScreen}
+            options={{ headerShown: false }}
+          />
         </>
       )}
     </Stack.Navigator>
