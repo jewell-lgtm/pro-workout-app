@@ -1,9 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { Box, Text } from "native-base"
-import React, { useCallback } from "react"
+import React, { useMemo, useState } from "react"
 import { DisplayError, ExerciseScreenView } from "../components"
 import { useExerciseQuery } from "../graphql/types"
 import { RootStackParamList } from "../navigation/types"
+import { Doable } from "../types"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Exercise">
 
@@ -12,9 +13,7 @@ export function ExerciseScreen(props: Props): JSX.Element {
     navigation,
     route: { params },
   } = props
-  const back = useCallback(() => {
-    navigation.goBack()
-  }, [navigation])
+
   const {
     data: { exercise = undefined } = {},
     error,
@@ -24,6 +23,32 @@ export function ExerciseScreen(props: Props): JSX.Element {
       id: params.exercise,
     },
   })
+  const [difficultyIndex, setDifficultyIndex] = useState(0)
+  const goBack = useMemo<Doable>(
+    () => ({
+      canDo: true,
+      do: () => navigation.goBack(),
+    }),
+    [navigation]
+  )
+  const previous = useMemo<Doable>(
+    () => ({
+      canDo: difficultyIndex > 0,
+      do: () => {
+        setDifficultyIndex(difficultyIndex - 1)
+      },
+    }),
+    [difficultyIndex, setDifficultyIndex]
+  )
+  const next = useMemo<Doable>(
+    () => ({
+      canDo: difficultyIndex + 1 < (exercise?.difficulties.length ?? 0),
+      do: () => {
+        setDifficultyIndex(difficultyIndex + 1)
+      },
+    }),
+    [exercise, difficultyIndex, setDifficultyIndex]
+  )
 
   if (error) {
     return <DisplayError error={error} />
@@ -40,8 +65,10 @@ export function ExerciseScreen(props: Props): JSX.Element {
   return (
     <ExerciseScreenView
       exercise={exercise}
-      difficulty={exercise.difficulties[0]}
-      onPressBack={back}
+      difficulty={exercise.difficulties[difficultyIndex]}
+      goBack={goBack}
+      previousDifficulty={previous}
+      nextDifficulty={next}
     />
   )
 }

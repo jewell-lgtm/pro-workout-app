@@ -1,6 +1,9 @@
 import {
   ArrowBackIcon,
   Box,
+  Button,
+  Heading,
+  HStack,
   IconButton,
   Image,
   ScrollView,
@@ -10,16 +13,21 @@ import React from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { Difficulty, Exercise } from "../../graphql/ExerciseQuery"
 import { useBackgroundColor, useTextColor } from "../../theme"
-import { PageHeader, PageSubheader } from "../type"
+import { Doable } from "../../types"
+import { PageSubheader } from "../type"
 
 type Props = {
   exercise: Exercise
   difficulty: Difficulty
-  onPressBack: () => void
+  goBack: Doable
+  previousDifficulty: Doable
+  nextDifficulty: Doable
 }
 
 export function ExerciseScreenView(props: Props): JSX.Element {
-  const { exercise, difficulty, onPressBack: handlePressBack } = props
+  const { exercise, difficulty, goBack, previousDifficulty, nextDifficulty } =
+    props
+
   const backgroundColor = useBackgroundColor()
   const textColor = useTextColor()
 
@@ -32,10 +40,11 @@ export function ExerciseScreenView(props: Props): JSX.Element {
           left={4}
           icon={<ArrowBackIcon color={textColor} />}
           zIndex={1}
-          onPress={handlePressBack}
+          disabled={!goBack.canDo}
+          onPress={goBack.do}
         />
         <ScrollView>
-          <Box height="240px" width="full" backgroundColor="#bada55">
+          <Box height="240px" backgroundColor="#bada55">
             <Image
               resizeMode={"cover"}
               source={{ uri: difficulty.imageUrl }}
@@ -44,7 +53,7 @@ export function ExerciseScreenView(props: Props): JSX.Element {
             />
           </Box>
           <Box p={4}>
-            <PageHeader>{difficulty.name}</PageHeader>
+            <Heading>{difficulty.name}</Heading>
             <PageSubheader>{exercise.name}</PageSubheader>
 
             {difficulty.description.split("\n").map((line, index) => (
@@ -54,6 +63,23 @@ export function ExerciseScreenView(props: Props): JSX.Element {
             ))}
           </Box>
         </ScrollView>
+
+        <HStack space={4} p={4}>
+          <Button
+            isDisabled={!previousDifficulty.canDo}
+            onPress={previousDifficulty.do}
+            flex={1}
+          >
+            Easier Difficulty
+          </Button>
+          <Button
+            isDisabled={!nextDifficulty.canDo}
+            onPress={nextDifficulty.do}
+            flex={1}
+          >
+            Harder Difficulty
+          </Button>
+        </HStack>
       </SafeAreaView>
     </Box>
   )

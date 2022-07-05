@@ -12,7 +12,10 @@ export function ExercisesScreen(props: Props): JSX.Element {
   const { navigation } = props
   const { data, error } = useWorkoutPlanQuery()
   const handlePressExercise = (exercise: WorkoutPlanExercise) =>
-    navigation.navigate("Exercise", { exercise: exercise.id })
+    navigation.navigate("Exercise", {
+      exercise: exercise.id,
+      difficultyIndex: 0,
+    })
 
   if (error) {
     return (

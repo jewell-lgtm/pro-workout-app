@@ -1,0 +1,19 @@
+query Difficulty($id: Int!) {
+  difficulty(id: $id) {
+    __typename
+    id
+    name
+    description
+    imageUrl
+    multiplier
+    exercise {
+      __typename
+      id
+      name
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
