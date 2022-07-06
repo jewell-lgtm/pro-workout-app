@@ -14,7 +14,6 @@ export function ExercisesScreen(props: Props): JSX.Element {
   const handlePressExercise = (exercise: WorkoutPlanExercise) =>
     navigation.navigate("Exercise", {
       exercise: exercise.id,
-      difficultyIndex: 0,
     })
 
   if (error) {
@@ -25,7 +24,7 @@ export function ExercisesScreen(props: Props): JSX.Element {
     )
   }
 
-  if (!data || !data.exercisePlan) {
+  if (!data || !data.exerciseSet) {
     return (
       <Box>
         <Text>Loading…</Text>
@@ -35,7 +34,7 @@ export function ExercisesScreen(props: Props): JSX.Element {
 
   return (
     <ExercisesScreenView
-      exercises={data.exercisePlan.exercises}
+      exercises={data.exerciseSet.exercises}
       onPressExercise={handlePressExercise}
     />
   )
