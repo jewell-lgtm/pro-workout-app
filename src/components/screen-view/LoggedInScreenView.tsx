@@ -14,7 +14,7 @@ import { useBackgroundColor } from "../../theme"
 type Props = {
   onSignOut: () => void
   onPressGoToExercises: () => void
-  onPressGoToMyWorkout: () => void
+  onPressRecordWorkout: () => void
   user: User
   colorMode: ColorMode
   toggleColorMode: () => void
@@ -25,7 +25,7 @@ export function LoggedInScreenView(props: Props) {
     user,
     onSignOut,
     onPressGoToExercises,
-    onPressGoToMyWorkout,
+    onPressRecordWorkout,
     colorMode,
     toggleColorMode,
   } = props
@@ -42,7 +42,7 @@ export function LoggedInScreenView(props: Props) {
         <Text>Light</Text>
       </HStack>
       <Box>
-        <Button onPress={onPressGoToMyWorkout}>Go To My Workout</Button>
+        <Button onPress={onPressRecordWorkout}>Record a Workout</Button>
       </Box>
       <Box>
         <Button onPress={onPressGoToExercises}>Go To Exercises</Button>

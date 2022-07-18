@@ -1,5 +1,5 @@
-import { useTheme } from "native-base"
+import { useColorModeValue } from "native-base"
 
 export const useBackgroundColor = () => {
-  return useTheme().colors.text["900"]
+  return useColorModeValue("white", "text.900")
 }

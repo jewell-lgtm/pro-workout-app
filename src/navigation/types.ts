@@ -8,5 +8,5 @@ export type RootStackParamList = {
     exercise: Exercise["id"]
   }
   Exercises: undefined
-  "My Workout": undefined
+  "Record Workout": undefined
 }

@@ -22,8 +22,8 @@ export function LoggedInScreen(props: Props): JSX.Element {
       onPressGoToExercises={() => {
         navigate("Exercises")
       }}
-      onPressGoToMyWorkout={() => {
-        navigate("My Workout")
+      onPressRecordWorkout={() => {
+        navigate("Record Workout")
       }}
       colorMode={colorMode}
       toggleColorMode={toggleColorMode}
