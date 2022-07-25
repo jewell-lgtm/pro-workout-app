@@ -8,6 +8,14 @@
     "packages/*"
   ],
   "devDependencies": {
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "prettier": "^2.7.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx,json,css,md}": "prettier --write"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
