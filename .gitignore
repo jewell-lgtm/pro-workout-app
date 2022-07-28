@@ -17,3 +17,12 @@ web-build/
 .graphqlconfig
 intellij.graphql
 __generated__
+
+#yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
