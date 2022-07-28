@@ -9,6 +9,7 @@
   ],
   "devDependencies": {
     "husky": ">=6",
+    "is-ci": "~3.0.1",
     "lint-staged": ">=10",
     "prettier": "~2.7.1"
   },
@@ -16,6 +17,6 @@
     "*.{js,ts,tsx,jsx,json,css,md}": "prettier --write"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "is-ci || husky install"
   }
 }
