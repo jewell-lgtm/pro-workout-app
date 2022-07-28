@@ -1,7 +1,7 @@
 import { Box } from "native-base"
 import React from "react"
 import { ActivityIndicator } from "react-native"
-import { useBackgroundColor } from "../../theme"
+import { useBackgroundColor } from "~/theme"
 
 export function LoadingFullScreenView() {
   const backgroundColor = useBackgroundColor()

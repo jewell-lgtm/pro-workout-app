@@ -1,6 +1,7 @@
-import { trpc } from "../utils/trpc"
+import { trpc } from "~/utils/trpc"
 import { NextPageWithLayout } from "./_app"
 import Link from "next/link"
+import { Smoo, smooFactory } from "@/data/Smoo"
 
 const IndexPage: NextPageWithLayout = () => {
   const utils = trpc.useContext()
@@ -19,9 +20,11 @@ const IndexPage: NextPageWithLayout = () => {
   //   }
   // }, [postsQuery.data, utils]);
 
+  const s: Smoo = smooFactory("something")
   return (
     <>
       <h1>Welcome to your tRPC starter!</h1>
+      <div style={{ whiteSpace: "pre" }}>{JSON.stringify(s, null, 2)}</div>
       <p>
         Check <a href="https://trpc.io/docs">the docs</a> whenever you get
         stuck, or ping <a href="https://twitter.com/alexdotjs">@alexdotjs</a> on

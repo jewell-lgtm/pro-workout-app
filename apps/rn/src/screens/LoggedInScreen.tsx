@@ -4,6 +4,7 @@ import React from "react"
 import { LoggedInScreenView } from "../components"
 import { useSignOut, useUser } from "../config"
 import { RootStackParamList } from "../navigation/types"
+import { smooFactory } from "@/data/Smoo"
 
 type Props = NativeStackScreenProps<RootStackParamList, "Logged In">
 
@@ -27,6 +28,7 @@ export function LoggedInScreen(props: Props): JSX.Element {
       }}
       colorMode={colorMode}
       toggleColorMode={toggleColorMode}
+      smoo={smooFactory("Bob")}
     />
   )
 }

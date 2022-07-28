@@ -8,8 +8,11 @@ module.exports = function (api) {
       [
         "module-resolver",
         {
+          root: ["."],
           alias: {
             "@native-base/icons": "@native-base/icons/lib",
+            "^~/(.+)": "./src/\\1",
+            "^@/(.+)/(.+)": "../../packages/\\1/src/\\2",
           },
         },
       ],

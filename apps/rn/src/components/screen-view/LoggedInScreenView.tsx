@@ -8,8 +8,9 @@ import {
   VStack,
 } from "native-base"
 import React from "react"
-import { User } from "../../config"
-import { useBackgroundColor } from "../../theme"
+import type { Smoo } from "@/data/Smoo"
+import { User } from "~/config"
+import { useBackgroundColor } from "~/theme"
 
 type Props = {
   onSignOut: () => void
@@ -18,6 +19,7 @@ type Props = {
   user: User
   colorMode: ColorMode
   toggleColorMode: () => void
+  smoo: Smoo
 }
 
 export function LoggedInScreenView(props: Props) {
@@ -28,6 +30,7 @@ export function LoggedInScreenView(props: Props) {
     onPressRecordWorkout,
     colorMode,
     toggleColorMode,
+    smoo,
   } = props
   const backgroundColor = useBackgroundColor()
 
@@ -36,6 +39,7 @@ export function LoggedInScreenView(props: Props) {
       <Text fontSize="2xl">
         Hello, {user.email}, {colorMode}
       </Text>
+      <Text>{JSON.stringify(smoo, null, 2)}</Text>
       <HStack alignItems="center" alignContent="center" space={4}>
         <Text>Dark</Text>
         <Switch value={colorMode === "light"} onToggle={toggleColorMode} />
