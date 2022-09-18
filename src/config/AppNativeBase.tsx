@@ -1,6 +1,6 @@
 import { NativeBaseProvider } from "native-base"
 import React, { ReactNode } from "react"
-import { appTheme } from "../theme"
+import { appTheme } from "@/theme"
 
 type Props = {
   children: ReactNode

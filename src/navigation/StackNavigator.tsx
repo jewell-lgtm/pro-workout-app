@@ -4,17 +4,10 @@ import {
 } from "@react-navigation/native-stack"
 import { useTheme } from "native-base"
 import React from "react"
-import { useAuth } from "../config"
-import {
-  ExerciseScreen,
-  ExercisesScreen,
-  LoggedInScreen,
-  LogInScreen,
-  RecordWorkoutScreen,
-  SignUpScreen,
-} from "../screens"
-import { useBackgroundColor } from "../theme"
 import { RootStackParamList } from "./types"
+import { useAuth } from "@/config"
+import { LoggedInScreen, LogInScreen, SignUpScreen } from "@/screens"
+import { useBackgroundColor } from "@/theme"
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -32,17 +25,6 @@ export function StackNavigator(): JSX.Element {
       ) : (
         <>
           <Stack.Screen name="Logged In" component={LoggedInScreen} />
-          <Stack.Screen
-            name="Exercise"
-            component={ExerciseScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Exercises" component={ExercisesScreen} />
-          <Stack.Screen
-            name="Record Workout"
-            component={RecordWorkoutScreen}
-            options={{ headerShown: false }}
-          />
         </>
       )}
     </Stack.Navigator>

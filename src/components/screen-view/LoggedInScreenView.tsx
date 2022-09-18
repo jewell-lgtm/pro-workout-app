@@ -8,27 +8,18 @@ import {
   VStack,
 } from "native-base"
 import React from "react"
-import { User } from "../../config"
-import { useBackgroundColor } from "../../theme"
+import { User } from "@/config"
+import { useBackgroundColor } from "@/theme"
 
 type Props = {
   onSignOut: () => void
-  onPressGoToExercises: () => void
-  onPressRecordWorkout: () => void
   user: User
   colorMode: ColorMode
   toggleColorMode: () => void
 }
 
 export function LoggedInScreenView(props: Props) {
-  const {
-    user,
-    onSignOut,
-    onPressGoToExercises,
-    onPressRecordWorkout,
-    colorMode,
-    toggleColorMode,
-  } = props
+  const { user, onSignOut, colorMode, toggleColorMode } = props
   const backgroundColor = useBackgroundColor()
 
   return (
@@ -41,12 +32,6 @@ export function LoggedInScreenView(props: Props) {
         <Switch value={colorMode === "light"} onToggle={toggleColorMode} />
         <Text>Light</Text>
       </HStack>
-      <Box>
-        <Button onPress={onPressRecordWorkout}>Record a Workout</Button>
-      </Box>
-      <Box>
-        <Button onPress={onPressGoToExercises}>Go To Exercises</Button>
-      </Box>
       <Box>
         <Button onPress={onSignOut}>Log Out</Button>
       </Box>
